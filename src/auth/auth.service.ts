@@ -53,7 +53,7 @@ export class AuthService {
   public async register(user: User): Promise<any> {
     user.password = this.hash(user.password);
 
-    return this.userService.update(user.id, user);
+    return this.userService.update(user);
   }
 
   /**

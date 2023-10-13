@@ -23,17 +23,23 @@ export class UserService {
   }
 
   findAll() {
-    return this.userRepository.find();
+    const result = this.userRepository.find();
+    console.log('result :>> ', result);
+    return result ? result : 'None found';
   }
 
   findOne(id: string) {
     return this.userRepository.findOne({
       where: [{ id }],
-    });
+    })
+      ? this.userRepository.findOne({
+          where: [{ id }],
+        })
+      : 'User unfound';
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+  update(updateUserDto: UpdateUserDto) {
+    return this.userRepository.save(updateUserDto);
   }
 
   remove(id: string) {

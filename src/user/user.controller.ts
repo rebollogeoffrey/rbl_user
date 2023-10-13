@@ -41,8 +41,9 @@ export class UserController {
 
   // @UseGuards(AuthGuard('jwt'))
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+  update(@Param('id') id: string, @Body() updatedUser: CreateUserDto) {
+    const updateUserDto: UpdateUserDto = { id, ...updatedUser };
+    return this.userService.update(updateUserDto);
   }
 
   // @UseGuards(AuthGuard('jwt'))

@@ -2,12 +2,9 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Achievement } from '../../achievement/entities/achievement.entity';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -71,11 +68,4 @@ export class User {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updated_at: Date;
-
-  // --------------RELATIONS
-  @ManyToMany(() => Achievement, {
-    cascade: true,
-  })
-  @JoinTable({ name: 'user_achievement' })
-  achievements: string[];
 }

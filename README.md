@@ -71,4 +71,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-# rbl_user
+
+# Routes
+
+Theses routes are the route used in the backend to CRUD data.
+
+## General
+
+- Login : /login
+- Create account : /login
+- Main page : /home
+- Statistic : /statistic
+- Account Management : /account
+
+## The Great Peasant's Quest
+
+- Main page : /tgpq
+- personnage Selection : /tgpq/personnage
+- Map : /tgpq/map
+- Battle : /tgpq/battle
+- Loading : /tgpq/loading
+
+## Lootery
+
+- Main page : /lootery

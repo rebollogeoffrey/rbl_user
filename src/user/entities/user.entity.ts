@@ -28,7 +28,7 @@ export class User {
 
   @Column({
     type: 'varchar',
-    length: 80,
+    length: 100,
     unique: false,
     nullable: false,
   })
@@ -61,21 +61,14 @@ export class User {
   // --------------TIMESTAMPS
   @CreateDateColumn({
     type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   created_at: Date;
 
   @UpdateDateColumn({
     type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
   })
   updated_at: Date;
-
-  // --------------RELATIONS
-  @ManyToMany(() => Achievement, {
-    cascade: true,
-  })
-  @JoinTable({ name: 'user_achievement' })
-  achievements: string[];
 }

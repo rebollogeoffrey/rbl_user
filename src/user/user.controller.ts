@@ -29,14 +29,25 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
+  @Get('all')
   findAll() {
     return this.userService.findAll();
   }
 
+  @Get('role')
+  getUserByRole(@Body() body) {
+    console.log('body :>> ', body);
+    return this.userService.getUserByRole(body.role);
+  }
+
+  @Get('email')
+  getUserByEmail(@Body() userBody) {
+    return this.userService.getUserByEmail(userBody.email);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+    return this.userService.findById(id);
   }
 
   // @UseGuards(AuthGuard('jwt'))

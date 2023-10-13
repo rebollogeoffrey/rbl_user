@@ -13,7 +13,7 @@ export class CreateUserDto {
   readonly role: UserRole;
 
   @IsString()
-  @Length(1, 80)
+  @Length(1, 100)
   @IsNotEmpty()
   readonly name: string;
 

@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 
 // Entity
 import { User } from '../user/entities/user.entity';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { UpdateUserDto } from 'src/user/dto/update-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,7 +19,12 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() user: User): Promise<any> {
+  async register(@Body() user: CreateUserDto): Promise<any> {
     return this.authService.register(user);
+  }
+
+  @Post('account')
+  async modify(@Body() user: UpdateUserDto): Promise<any> {
+    return this.authService.changePassword(user);
   }
 }

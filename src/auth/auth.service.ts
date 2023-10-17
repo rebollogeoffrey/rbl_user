@@ -1,8 +1,9 @@
 // Base
 import { Injectable } from '@nestjs/common';
 
-// Entity
-import { User } from '../user/entities/user.entity';
+// DTO
+import { UpdateUserDto } from 'src/user/dto/update-user.dto';
+import { LoginUserDto } from 'src/user/dto/login-user.dto';
 
 // Other Service
 import { JwtService } from '@nestjs/jwt';
@@ -10,6 +11,7 @@ import { UserService } from '../user/user.service';
 
 // Misc
 import * as crypto from 'crypto';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,14 +33,18 @@ export class AuthService {
    * a 404 status
    * @param user
    */
-  public async login(user: User): Promise<any | { status: number }> {
+  public async login(user: LoginUserDto): Promise<any | { status: number }> {
     return this.validate(user.email).then((userData) => {
-      // user not found
-      if (!userData || userData.password != this.hash(user.password)) {
+      // User not found
+      if (!userData) {
         return { status: 404 };
       }
+      // Password doesn't match
+      else if (userData.password != this.hash(user.password)) {
+        return { message: 'This email or password is incorrect.' };
+      }
 
-      // user found
+      // User found
       // The access token will be composed by the email
       const payload = `${userData.email}`;
       const accessToken = this.jwtService.sign(payload);
@@ -50,7 +56,13 @@ export class AuthService {
     });
   }
 
-  public async register(user: User): Promise<any> {
+  public async register(user: CreateUserDto): Promise<any> {
+    user.password = this.hash(user.password);
+
+    return this.userService.create(user);
+  }
+
+  public async changePassword(user: UpdateUserDto): Promise<any> {
     user.password = this.hash(user.password);
 
     return this.userService.update(user);

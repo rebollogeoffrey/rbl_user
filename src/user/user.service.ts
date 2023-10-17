@@ -32,7 +32,7 @@ export class UserService {
     });
   }
 
-  update(updateUserDto: UpdateUserDto): Promise<User | undefined> {
+  async update(updateUserDto: UpdateUserDto): Promise<User | undefined> {
     return this.userRepository.save(updateUserDto);
   }
 

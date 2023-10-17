@@ -31,8 +31,5 @@ export class CreateUserDto {
   })
   @Length(5, 255)
   @IsNotEmpty()
-  readonly password: string;
-
-  @IsString()
-  readonly url_image: string;
+  password: string;
 }
